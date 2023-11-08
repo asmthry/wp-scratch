@@ -15,5 +15,18 @@
 
 defined( 'ABSPATH' ) || die( 'What are you doing here? No direct access allowed.' );
 
-/** Define Constructors For ASMTHRY WP Scratch plugin */
-define( 'ASMTHRY_PLUGIN_VERSION', '0.0.1' );
+/**
+ * Define Constants For WP Scratch Plugin
+ */
+define( 'WP_SCRATCH_VERSION', '0.0.1' );
+define( 'WP_SCRATCH_DIR', plugin_dir_path( __FILE__ ) . '/' );
+
+/** Including Files For WP Scratch Plugin Support */
+
+/**Plugin Activate */
+require_once WP_SCRATCH_DIR . 'class-asmthry-activate.php';
+register_activation_hook( __FILE__, array( 'Asmthry_Activate', 'activate' ) );
+
+/**Plugin Deactivate */
+require_once WP_SCRATCH_DIR . 'class-asmthry-deactivate.php';
+register_deactivation_hook( __FILE__, array( 'Asmthry_Deactivate', 'deactivate' ) );
