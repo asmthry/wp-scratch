@@ -7,9 +7,9 @@
  */
 
 /** ASMTHRY Plugin deactivation */
-if ( ! class_exists( 'Asmthry_Deactivate' ) ) {
+if ( ! class_exists( 'WPScratch_Deactivate' ) ) {
 	/** Class for doing when plugin deactivating */
-	class Asmthry_Deactivate {
+	class WPScratch_Deactivate {
 		/** Execute code when deactivation Instance created */
 		public static function deactivate() {
 			/** Write plugin deactivation code here */

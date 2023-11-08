@@ -7,9 +7,9 @@
  */
 
 /** ASMTHRY Plugin activation */
-if ( ! class_exists( 'Asmthry_Activate' ) ) {
+if ( ! class_exists( 'WPScratch_Activate' ) ) {
 	/** Class for doing when plugin activating */
-	class Asmthry_Activate {
+	class WPScratch_Activate {
 		/** Execute code when Activation Instance created */
 		public static function activate() {
 			/** Write plugin activation code here */
