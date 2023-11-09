@@ -33,6 +33,9 @@ require_once WP_SCRATCH_DIR . 'class-wpscratch-helper.php';
 /** Include custom post type helper class */
 require_once WP_SCRATCH_DIR . 'includes/class-wpscratch-cpt.php';
 
+/** Include theme support class */
+require_once WP_SCRATCH_DIR . 'includes/class-wpscratch-theme-support.php';
+
 /**Plugin Deactivate */
 require_once WP_SCRATCH_DIR . 'class-wpscratch-deactivate.php';
 register_deactivation_hook( __FILE__, array( 'WPScratch_Deactivate', 'deactivate' ) );

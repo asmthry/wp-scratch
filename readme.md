@@ -2,6 +2,12 @@
 
 This plugin will help you reduce your coding effort.
 
+### Add Theme Support To Your Theme.
+
+```php
+WPScratch_Theme_Support::add( 'title-tag' );
+```
+
 ### Create custom post type
 
 ```php
@@ -23,7 +29,7 @@ add_filter( 'asmthry_cpt_{Post Slug}', 'filter_post_arguments_values', 10, 2 );
 WPScratch_Cpt::filter(
 	'Blog',
 	function ( $args ) {
-	$array['supports'] = array( 'title', 'editor', 'thumbnail' );
+		$array['supports'] = array( 'title', 'editor', 'thumbnail' );
 		return $args;
 	}
 );
