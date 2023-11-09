@@ -24,9 +24,15 @@ define( 'WP_SCRATCH_DIR', plugin_dir_path( __FILE__ ) . '/' );
 /** Including Files For WP Scratch Plugin Support */
 
 /**Plugin Activate */
-require_once WP_SCRATCH_DIR . 'class-asmthry-activate.php';
-register_activation_hook( __FILE__, array( 'Asmthry_Activate', 'activate' ) );
+require_once WP_SCRATCH_DIR . 'class-wpscratch-activate.php';
+register_activation_hook( __FILE__, array( 'WPScratch_Activate', 'activate' ) );
+
+/** Include custom post type helper class */
+require_once WP_SCRATCH_DIR . 'class-wpscratch-helper.php';
+
+/** Include custom post type helper class */
+require_once WP_SCRATCH_DIR . 'includes/class-wpscratch-cpt.php';
 
 /**Plugin Deactivate */
-require_once WP_SCRATCH_DIR . 'class-asmthry-deactivate.php';
-register_deactivation_hook( __FILE__, array( 'Asmthry_Deactivate', 'deactivate' ) );
+require_once WP_SCRATCH_DIR . 'class-wpscratch-deactivate.php';
+register_deactivation_hook( __FILE__, array( 'WPScratch_Deactivate', 'deactivate' ) );
