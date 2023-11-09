@@ -135,10 +135,46 @@ if ( ! class_exists( 'WPScratch_Cpt' ) ) {
 		}
 
 		/**
+		 * Create post filter
+		 *
+		 * @param string   $name - name of the custom post.
+		 * @param callable $fun - Filter function.
+		 */
+		public static function filter( string $name, callable $fun ) {
+			add_filter(
+				'asmthry_cpt_' . WPScratch_Helper::slug( $name ),
+				$fun,
+				10,
+				2
+			);
+		}
+
+		/**
 		 * Register custom post type
 		 */
 		public function create() {
-			register_post_type( WPScratch_Helper::slug( $this->name ), get_object_vars( $this ) );
+			add_action(
+				'init',
+				function () {
+					register_post_type(
+						WPScratch_Helper::slug( $this->name ),
+						$this->get_filtered_parameters()
+					);
+				}
+			);
+		}
+
+		/**
+		 * Apply WordPress custom post filter
+		 */
+		private function get_filtered_parameters() {
+
+			$filters = apply_filters(
+				'asmthry_cpt_' . WPScratch_Helper::slug( $this->name ),
+				get_object_vars( $this )
+			);
+
+			return WPScratch_Helper::apply_filter( get_object_vars( $this ), $filters );
 		}
 
 		/** Prepare Custom Post Type Labels Based On Name. */
