@@ -2,6 +2,12 @@
 
 This plugin will help you reduce your coding effort.
 
+### Add Theme Support To Your Theme.
+
+```php
+WPScratch_Theme_Support::add( 'title-tag' );
+```
+
 ### Create custom post type
 
 ```php
