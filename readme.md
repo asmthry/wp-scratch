@@ -23,7 +23,7 @@ add_filter( 'asmthry_cpt_{Post Slug}', 'filter_post_arguments_values', 10, 2 );
 WPScratch_Cpt::filter(
 	'Blog',
 	function ( $args ) {
-	$array['supports'] = array( 'title', 'editor', 'thumbnail' );
+		$array['supports'] = array( 'title', 'editor', 'thumbnail' );
 		return $args;
 	}
 );
