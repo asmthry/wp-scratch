@@ -6,12 +6,12 @@
  * @package WP Scratch
  */
 
-// Check if Asmthry_Cpt exists.
+// Check if WPScratch_Cpt exists.
 if ( ! class_exists( 'WPScratch_Cpt' ) ) {
 	/**
 	 * Use this class to create custom post type
 	 *
-	 * @class Asmthry_Cpt
+	 * @class WPScratch_Cpt
 	 */
 	class WPScratch_Cpt {
 		/**
