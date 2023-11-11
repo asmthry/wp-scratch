@@ -8,6 +8,24 @@ This plugin will help you reduce your coding effort.
 WPScratch_Theme_Support::add( 'title-tag' );
 ```
 
+### Enqueue Styles and Scripts
+With the WPScratch_Enqueue class you can enqueue the script and style and control page-wise loading
+
+```php
+( new WPScratch_Enqueue() )
+->style(
+	'first-style',
+	ASMTHRY_THEME_URL . 'assets/css/style.css'
+)->style(
+	'second-style',
+	ASMTHRY_THEME_URL . 'assets/css/page.css'
+)->except( 'home-page' )
+->style(
+	'first-script',
+	ASMTHRY_THEME_URL . 'assets/js/script.js'
+)->only( 'home-page' );
+```
+
 ### Create custom post type
 
 ```php
