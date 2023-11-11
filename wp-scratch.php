@@ -20,6 +20,7 @@ defined( 'ABSPATH' ) || die( 'What are you doing here? No direct access allowed.
  */
 define( 'WP_SCRATCH_VERSION', '0.0.1' );
 define( 'WP_SCRATCH_DIR', plugin_dir_path( __FILE__ ) . '/' );
+define( 'ASMTHRY_THEME_URL', get_template_directory_uri() . '/' );
 
 /** Including Files For WP Scratch Plugin Support */
 
@@ -35,6 +36,9 @@ require_once WP_SCRATCH_DIR . 'includes/class-wpscratch-cpt.php';
 
 /** Include theme support class */
 require_once WP_SCRATCH_DIR . 'includes/class-wpscratch-theme-support.php';
+
+/** Include theme support class */
+require_once WP_SCRATCH_DIR . 'includes/class-wpscratch-enqueue.php';
 
 /**Plugin Deactivate */
 require_once WP_SCRATCH_DIR . 'class-wpscratch-deactivate.php';

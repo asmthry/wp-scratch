@@ -6,12 +6,12 @@
  * @package WP Scratch
  */
 
-// Check if Asmthry_Theme_Support exists.
+// Check if WPScratch_Theme_Support exists.
 if ( ! class_exists( 'WPScratch_Theme_Support' ) ) {
 	/**
 	 * Use this class to create custom post type
 	 *
-	 * @class Asmthry_Theme_Support
+	 * @class WPScratch_Theme_Support
 	 */
 	class WPScratch_Theme_Support {
 		/**
