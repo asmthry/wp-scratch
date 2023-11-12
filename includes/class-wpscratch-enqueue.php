@@ -1,7 +1,7 @@
 <?php
 /**
  * Author: ASMTHRY
- * This class will helps to add custom post type to WordPress
+ * This class will helps to enqueue script and style to WordPress
  *
  * @package WP Scratch
  */

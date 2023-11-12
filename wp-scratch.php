@@ -28,7 +28,7 @@ define( 'ASMTHRY_THEME_URL', get_template_directory_uri() . '/' );
 require_once WP_SCRATCH_DIR . 'class-wpscratch-activate.php';
 register_activation_hook( __FILE__, array( 'WPScratch_Activate', 'activate' ) );
 
-/** Include custom post type helper class */
+/** Include helper class */
 require_once WP_SCRATCH_DIR . 'class-wpscratch-helper.php';
 
 /** Include custom post type helper class */
@@ -37,8 +37,11 @@ require_once WP_SCRATCH_DIR . 'includes/class-wpscratch-cpt.php';
 /** Include theme support class */
 require_once WP_SCRATCH_DIR . 'includes/class-wpscratch-theme-support.php';
 
-/** Include theme support class */
+/** Include enqueue support class */
 require_once WP_SCRATCH_DIR . 'includes/class-wpscratch-enqueue.php';
+
+/** Include customizer support class */
+require_once WP_SCRATCH_DIR . 'includes/class-wpscratch-customizer.php';
 
 /**Plugin Deactivate */
 require_once WP_SCRATCH_DIR . 'class-wpscratch-deactivate.php';
