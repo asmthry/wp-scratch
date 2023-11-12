@@ -12,32 +12,32 @@ if ( ! class_exists( 'WPScratch_Customizer' ) ) {
 	 */
 	class WPScratch_Customizer {
 		/**
-		 * Use this variable to handle current settings
+		 * Use this variable to handle current section
 		 *
 		 * @var $customize
 		 */
-		public string $settings;
+		public string $section;
 
 		/**
-		 * Use this variable to handle current option
+		 * Use this variable to handle current control
 		 *
-		 * @var $option
+		 * @var string $control
 		 */
-		public string $option;
+		public string $control;
 
 		/**
 		 * Handle customizer configuration
 		 *
-		 * @var $customize
+		 * @var $sections
 		 */
-		public $customizer = array();
+		public $sections = array();
 
 		/**
 		 * Handle customizer control option configuration
 		 *
-		 * @var $options
+		 * @var $controls
 		 */
-		public $options = array();
+		public $controls = array();
 
 		/**
 		 * Add customizer settings section
@@ -48,11 +48,12 @@ if ( ! class_exists( 'WPScratch_Customizer' ) ) {
 		 *
 		 * @return $this;
 		 */
-		public function settings( string $title, string $description = '', int $priority = 70 ) {
-			$slug                      = WPScratch_Helper::slug( $title );
-			$this->options[ $slug ]    = array();
-			$this->settings            = $slug;
-			$this->customizer[ $slug ] = array(
+		public function section( string $title, string $description = '', int $priority = 70 ) {
+			$slug                    = WPScratch_Helper::slug( $title );
+			$this->controls[ $slug ] = array();
+			$this->section           = $slug;
+			$this->control           = '';
+			$this->sections[ $slug ] = array(
 				'id'          => $slug,
 				'title'       => $title,
 				'description' => $description,
@@ -63,25 +64,49 @@ if ( ! class_exists( 'WPScratch_Customizer' ) ) {
 		}
 
 		/**
-		 * Add customizer settings section
+		 * Add customizer settings controls
 		 *
 		 * @param string $title - Name of the settings.
 		 * @param string $type - Type of the settings field.
 		 *
 		 * @return $this;
 		 */
-		public function control( string $title, string $type = 'text' ) {
-			$slug         = WPScratch_Helper::slug( $title );
-			$this->option = $slug;
-			array_push(
-				$this->options[ $this->settings ],
-				array(
-					'id'       => $slug,
-					'type'     => $type,
-					'title'    => $title,
-					'settings' => $slug,
-				)
+		public function settings( string $title, string $type = 'text' ) {
+			$slug                                      = WPScratch_Helper::slug( $title );
+			$this->control                             = $slug;
+			$this->controls[ $this->section ][ $slug ] =
+			array(
+				'id'       => $slug,
+				'type'     => $type,
+				'title'    => $title,
+				'settings' => $slug,
 			);
+
+			return $this;
+		}
+
+		/**
+		 * Change customizer control type
+		 *
+		 * @param string $type - Type of the control.
+		 *
+		 * @return $this;
+		 */
+		public function type( string $type ) {
+			$this->controls[ $this->section ][ $this->control ]['type'] = $type;
+
+			return $this;
+		}
+
+		/**
+		 * Change customizer control
+		 *
+		 * @param string $control - Change customizer control class name.
+		 *
+		 * @return $this;
+		 */
+		public function control( string $control ) {
+			$this->controls[ $this->section ][ $this->control ]['control'] = $control;
 
 			return $this;
 		}
@@ -93,8 +118,8 @@ if ( ! class_exists( 'WPScratch_Customizer' ) ) {
 			add_action(
 				'customize_register',
 				function ( $wp_customize ) {
-					foreach ( $this->customizer as $value ) {
-						if ( ! isset( $this->options[ $value['id'] ] ) ) {
+					foreach ( $this->sections as $value ) {
+						if ( ! isset( $this->controls[ $value['id'] ] ) ) {
 							continue;
 						}
 						$wp_customize->add_section(
@@ -106,27 +131,39 @@ if ( ! class_exists( 'WPScratch_Customizer' ) ) {
 							)
 						);
 
-						foreach ( $this->options[ $value['id'] ] as $option ) {
+						foreach ( $this->controls[ $value['id'] ] as $option ) {
 							$wp_customize->add_setting(
 								$option['id'],
 								array(
 									'capability' => 'edit_theme_options',
 								)
 							);
-							$wp_customize->add_control(
-								$option['id'] . '_input',
-								array(
-									'type'     => $option['type'],
-									'label'    => $option['title'],
-									'section'  => $value['id'],
-									'settings' => $option['id'],
-								)
-							);
+							if ( isset( $option['control'] ) ) {
+								$wp_customize->add_control(
+									new $option['control'](
+										$wp_customize,
+										$option['id'],
+										array(
+											'label'   => $option['title'],
+											'section' => $value['id'],
+										)
+									)
+								);
+							} else {
+								$wp_customize->add_control(
+									$option['id'] . '_input',
+									array(
+										'type'     => $option['type'],
+										'label'    => $option['title'],
+										'section'  => $value['id'],
+										'settings' => $option['id'],
+									)
+								);
+							}
 						}
 					}
 				}
 			);
 		}
 	}
-
 }
