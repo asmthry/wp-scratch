@@ -42,13 +42,25 @@ function filter_post_arguments_values( $post_name, $post_slug ) {
 	$array['supports'] = array( 'title', 'editor', 'thumbnail' );
 	return $array;
 }
-add_filter( 'asmthry_cpt_{Post Slug}', 'filter_post_arguments_values', 10, 2 );
+add_filter( 'wpscratch_cpt_{Post Slug}', 'filter_post_arguments_values', 10, 2 );
 // OR
 WPScratch_Cpt::filter(
-	'Blog',
+	'Slide',
 	function ( $args ) {
 		$array['supports'] = array( 'title', 'editor', 'thumbnail' );
 		return $args;
 	}
 );
+```
+### Create Taxonomies
+```php
+( new WPScratch_Taxonomy( 'Options', 'Slide' ) );
+```
+#### You can filter taxonomy arguments and labels.
+```php
+function change_taxonomy_arguments( $array ) {
+	$array['show_in_menu'] = false;
+	return $array;
+}
+add_filter( 'wpscratch_taxonomy_options', 'change_taxonomy_arguments', 10, 2 );
 ```

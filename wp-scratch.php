@@ -34,6 +34,9 @@ require_once WP_SCRATCH_DIR . 'class-wpscratch-helper.php';
 /** Include custom post type helper class */
 require_once WP_SCRATCH_DIR . 'includes/class-wpscratch-cpt.php';
 
+/** Include taxonomy helper class */
+require_once WP_SCRATCH_DIR . 'includes/class-wpscratch-taxonomy.php';
+
 /** Include theme support class */
 require_once WP_SCRATCH_DIR . 'includes/class-wpscratch-theme-support.php';
 

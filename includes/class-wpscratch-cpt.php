@@ -142,7 +142,7 @@ if ( ! class_exists( 'WPScratch_Cpt' ) ) {
 		 */
 		public static function filter( string $name, callable $fun ) {
 			add_filter(
-				'asmthry_cpt_' . WPScratch_Helper::slug( $name ),
+				'wpscratch_cpt_' . WPScratch_Helper::slug( $name ),
 				$fun,
 				10,
 				2
@@ -170,7 +170,7 @@ if ( ! class_exists( 'WPScratch_Cpt' ) ) {
 		private function get_filtered_parameters() {
 
 			$filters = apply_filters(
-				'asmthry_cpt_' . WPScratch_Helper::slug( $this->name ),
+				'wpscratch_cpt_' . WPScratch_Helper::slug( $this->name ),
 				get_object_vars( $this )
 			);
 
