@@ -28,14 +28,19 @@ With the WPScratch_Enqueue class you can enqueue the script and style and contro
 
 ### Create customizer
 ```php
+// Create customizer
 ( new WPScratch_Customizer() )
 	->section( 'Contact Details' )
 	->settings( 'Phone Number 1' )
+	->section( 'Address' )
 	->settings( 'Text Color' )
 	->control( 'WP_Customize_Color_Control' )
 	->settings( 'Address1', 'textarea' )
 	->settings( 'Address 2' )
 	->type( 'textarea' );
+
+// Display customizer value
+echo WPScratch_Customizer::get( 'Phone Number 1' );
 ```
 
 ### Create custom post type
