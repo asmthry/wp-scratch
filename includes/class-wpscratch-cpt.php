@@ -135,6 +135,24 @@ if ( ! class_exists( 'WPScratch_Cpt' ) ) {
 		}
 
 		/**
+		 * Set taxonomy for the custom post type
+		 *
+		 * @param string        $name - Name of the taxonomy.
+		 * @param callable|null $fun - Do some actions on taxonomy instance.
+		 *
+		 * @return $this
+		 */
+		public function taxonomy( string $name, callable|null $fun = null ) {
+			if ( $fun ) {
+				$fun( new WPScratch_Taxonomy( $name, $this->name ) );
+			} else {
+				new WPScratch_Taxonomy( $name, $this->name );
+			}
+
+			return $this;
+		}
+
+		/**
 		 * Create post filter
 		 *
 		 * @param string   $name - name of the custom post.

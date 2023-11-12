@@ -91,6 +91,115 @@ if ( ! class_exists( 'WPScratch_Taxonomy' ) ) {
 		}
 
 		/**
+		 * Set new taxonomy name.
+		 *
+		 * @param string $name - Name of the taxonomy.
+		 *
+		 * @return $this
+		 */
+		public function set_name( string $name ) {
+			$this->name = $name;
+			$this->prepare_labels();
+			return $this;
+		}
+
+		/**
+		 * Set taxonomy show_in_rest.
+		 *
+		 * @param bool $status - show_in_rest.
+		 *
+		 * @return $this
+		 */
+		public function set_show_in_rest( bool $status ) {
+			$this->show_in_rest = $status;
+			return $this;
+		}
+
+		/**
+		 * Set taxonomy show_admin_column.
+		 *
+		 * @param bool $status - show_admin_column.
+		 *
+		 * @return $this
+		 */
+		public function set_show_admin_column( bool $status ) {
+			$this->show_admin_column = $status;
+			return $this;
+		}
+
+		/**
+		 * Set taxonomy show_ui.
+		 *
+		 * @param bool $status - show_ui.
+		 *
+		 * @return $this
+		 */
+		public function set_show_ui( bool $status ) {
+			$this->show_ui = $status;
+			return $this;
+		}
+
+		/**
+		 * Set taxonomy show_in_menu.
+		 *
+		 * @param bool $status - show_in_menu.
+		 *
+		 * @return $this
+		 */
+		public function set_show_in_menu( bool $status ) {
+			$this->show_in_menu = $status;
+			return $this;
+		}
+
+		/**
+		 * Set taxonomy query_var.
+		 *
+		 * @param bool $status - query_var.
+		 *
+		 * @return $this
+		 */
+		public function set_query_var( bool $status ) {
+			$this->query_var = $status;
+			return $this;
+		}
+
+		/**
+		 * Set taxonomy rewrite.
+		 *
+		 * @param array $rewrite - rewrite.
+		 *
+		 * @return $this
+		 */
+		public function set_rewrite( array $rewrite ) {
+			$this->rewrite = $rewrite;
+			return $this;
+		}
+
+		/**
+		 * Set taxonomy update_count_callback.
+		 *
+		 * @param string $name - update_count_callback.
+		 *
+		 * @return $this
+		 */
+		public function set_update_count_callback( string $name ) {
+			$this->update_count_callback = $name;
+			return $this;
+		}
+
+		/**
+		 * Set taxonomy labels.
+		 *
+		 * @param array $labels - labels.
+		 *
+		 * @return $this
+		 */
+		public function set_labels( array $labels ) {
+			$this->labels = $labels;
+			return $this;
+		}
+
+		/**
 		 * Create taxonomy filter
 		 *
 		 * @param string   $name - Name of the taxonomy.

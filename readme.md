@@ -55,6 +55,15 @@ WPScratch_Cpt::filter(
 ### Create Taxonomies
 ```php
 ( new WPScratch_Taxonomy( 'Options', 'Slide' ) );
+// OR - Create post with some taxonomies
+( new WPScratch_Cpt( 'Slide' ) )
+	->taxonomy( 'Titles' )
+	->taxonomy(
+		'Stories',
+		function ( $taxonomy ) {
+			$taxonomy->set_name( 'Story' );
+		}
+	);
 ```
 #### You can filter taxonomy arguments and labels.
 ```php
