@@ -150,21 +150,6 @@ if ( ! class_exists( 'WPScratch_Cpt' ) ) {
 		}
 
 		/**
-		 * Register custom post type
-		 */
-		public function create() {
-			add_action(
-				'init',
-				function () {
-					register_post_type(
-						WPScratch_Helper::slug( $this->name ),
-						$this->get_filtered_parameters()
-					);
-				}
-			);
-		}
-
-		/**
 		 * Apply WordPress custom post filter
 		 */
 		private function get_filtered_parameters() {
@@ -201,6 +186,21 @@ if ( ! class_exists( 'WPScratch_Cpt' ) ) {
 				'archives'              => __( $this->name . ' archives', 'asmthry' ),
 			);
 			// @codingStandardsIgnoreEnd
+		}
+
+		/**
+		 * Register custom post type
+		 */
+		public function __destruct() {
+			add_action(
+				'init',
+				function () {
+					register_post_type(
+						WPScratch_Helper::slug( $this->name ),
+						$this->get_filtered_parameters()
+					);
+				}
+			);
 		}
 	}
 }

@@ -29,7 +29,7 @@ With the WPScratch_Enqueue class you can enqueue the script and style and contro
 ### Create custom post type
 
 ```php
-WPScratch_Cpt::init( 'Blog' )->create();
+WPScratch_Cpt::init( 'Blog' );
 ```
 
 #### Filter post arguments and labels
