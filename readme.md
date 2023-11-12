@@ -13,17 +13,34 @@ With the WPScratch_Enqueue class you can enqueue the script and style and contro
 
 ```php
 ( new WPScratch_Enqueue() )
-->style(
-	'first-style',
-	ASMTHRY_THEME_URL . 'assets/css/style.css'
-)->style(
-	'second-style',
-	ASMTHRY_THEME_URL . 'assets/css/page.css'
-)->except( 'home-page' )
-->style(
-	'first-script',
-	ASMTHRY_THEME_URL . 'assets/js/script.js'
-)->only( 'home-page' );
+	->style(
+		'first-style',
+		ASMTHRY_THEME_URL . 'assets/css/style.css'
+	)->style(
+		'second-style',
+		ASMTHRY_THEME_URL . 'assets/css/page.css'
+	)->except( 'home-page' )
+	->style(
+		'first-script',
+		ASMTHRY_THEME_URL . 'assets/js/script.js'
+	)->only( 'home-page' );
+```
+
+### Create customizer
+```php
+// Create customizer
+( new WPScratch_Customizer() )
+	->section( 'Contact Details' )
+	->settings( 'Phone Number 1' )
+	->section( 'Address' )
+	->settings( 'Text Color' )
+	->control( 'WP_Customize_Color_Control' )
+	->settings( 'Address1', 'textarea' )
+	->settings( 'Address 2' )
+	->type( 'textarea' );
+
+// Display customizer value
+echo WPScratch_Customizer::get( 'Phone Number 1' );
 ```
 
 ### Create custom post type
