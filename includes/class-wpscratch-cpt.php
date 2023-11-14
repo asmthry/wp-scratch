@@ -116,15 +116,6 @@ if ( ! class_exists( 'WPScratch_Cpt' ) ) {
 		}
 
 		/**
-		 * Set custom post type name
-		 *
-		 * @param string $name - Name of the custom post type.
-		 */
-		public static function init( string $name ) {
-			return new self( $name );
-		}
-
-		/**
 		 * Set custom post type name when the instance create
 		 *
 		 * @param string $name - Name of the custom post type.
@@ -137,7 +128,7 @@ if ( ! class_exists( 'WPScratch_Cpt' ) ) {
 		/**
 		 * Set taxonomy show_ui.
 		 *
-		 * @param bool $status - show_ui.
+		 * @param bool $status - This custom post type requires UI?.
 		 *
 		 * @return $this
 		 */
@@ -209,18 +200,6 @@ if ( ! class_exists( 'WPScratch_Cpt' ) ) {
 				new WPScratch_Taxonomy( $name, $this->name );
 			}
 
-			return $this;
-		}
-
-		/**
-		 * Create post filter
-		 *
-		 * @param callable $fun - Filter function.
-		 *
-		 * @return $this
-		 */
-		public function filter( callable $fun ) {
-			call_user_func( $fun, $this );
 			return $this;
 		}
 

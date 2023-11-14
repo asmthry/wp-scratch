@@ -200,18 +200,6 @@ if ( ! class_exists( 'WPScratch_Taxonomy' ) ) {
 		}
 
 		/**
-		 * Create taxonomy filter
-		 *
-		 * @param callable $fun - Filter function.
-		 *
-		 * @return $this
-		 */
-		public function filter( callable $fun ) {
-			call_user_func( $fun, $this );
-			return $this;
-		}
-
-		/**
 		 * Prepare Taxonomy Labels Based On Name.
 		 */
 		private function prepare_labels() {
