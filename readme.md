@@ -61,13 +61,12 @@ function filter_post_arguments_values( $post_name, $post_slug ) {
 }
 add_filter( 'wpscratch_cpt_{Post Slug}', 'filter_post_arguments_values', 10, 2 );
 // OR
-WPScratch_Cpt::filter(
-	'Slide',
-	function ( $args ) {
-		$array['supports'] = array( 'title', 'editor', 'thumbnail' );
-		return $args;
-	}
-);
+( new WPScratch_Cpt( 'Slide' ) )
+	->filter(
+		function ( $post ) {
+			$post->set_show_in_menu( false );
+		}
+	);
 ```
 ### Create Taxonomies
 ```php
@@ -89,4 +88,11 @@ function change_taxonomy_arguments( $array ) {
 	return $array;
 }
 add_filter( 'wpscratch_taxonomy_options', 'change_taxonomy_arguments', 10, 2 );
+// OR
+( new WPScratch_Taxonomy( 'Options', 'Slide' ) )
+	->filter(
+		function ( $post ) {
+			$post->set_show_in_menu( false );
+		}
+	);
 ```

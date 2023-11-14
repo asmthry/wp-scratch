@@ -202,16 +202,13 @@ if ( ! class_exists( 'WPScratch_Taxonomy' ) ) {
 		/**
 		 * Create taxonomy filter
 		 *
-		 * @param string   $name - Name of the taxonomy.
 		 * @param callable $fun - Filter function.
+		 *
+		 * @return $this
 		 */
-		public static function filter( string $name, callable $fun ) {
-			add_filter(
-				'wpscratch_taxonomy_' . WPScratch_Helper::slug( $name ),
-				$fun,
-				10,
-				2
-			);
+		public function filter( callable $fun ) {
+			call_user_func( $fun, $this );
+			return $this;
 		}
 
 		/**

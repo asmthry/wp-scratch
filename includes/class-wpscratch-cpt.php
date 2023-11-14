@@ -135,6 +135,66 @@ if ( ! class_exists( 'WPScratch_Cpt' ) ) {
 		}
 
 		/**
+		 * Set taxonomy show_ui.
+		 *
+		 * @param bool $status - show_ui.
+		 *
+		 * @return $this
+		 */
+		public function set_show_ui( bool $status ) {
+			$this->show_ui = $status;
+			return $this;
+		}
+
+		/**
+		 * Set taxonomy show_in_menu.
+		 *
+		 * @param bool $status - show_in_menu.
+		 *
+		 * @return $this
+		 */
+		public function set_show_in_menu( bool $status ) {
+			$this->show_in_menu = $status;
+			return $this;
+		}
+
+		/**
+		 * Set taxonomy query_var.
+		 *
+		 * @param bool $status - query_var.
+		 *
+		 * @return $this
+		 */
+		public function set_query_var( bool $status ) {
+			$this->query_var = $status;
+			return $this;
+		}
+
+		/**
+		 * Set taxonomy rewrite.
+		 *
+		 * @param array $rewrite - rewrite.
+		 *
+		 * @return $this
+		 */
+		public function set_rewrite( array $rewrite ) {
+			$this->rewrite = $rewrite;
+			return $this;
+		}
+
+		/**
+		 * Set taxonomy labels.
+		 *
+		 * @param array $labels - labels.
+		 *
+		 * @return $this
+		 */
+		public function set_labels( array $labels ) {
+			$this->labels = $labels;
+			return $this;
+		}
+
+		/**
 		 * Set taxonomy for the custom post type
 		 *
 		 * @param string        $name - Name of the taxonomy.
@@ -155,16 +215,13 @@ if ( ! class_exists( 'WPScratch_Cpt' ) ) {
 		/**
 		 * Create post filter
 		 *
-		 * @param string   $name - name of the custom post.
 		 * @param callable $fun - Filter function.
+		 *
+		 * @return $this
 		 */
-		public static function filter( string $name, callable $fun ) {
-			add_filter(
-				'wpscratch_cpt_' . WPScratch_Helper::slug( $name ),
-				$fun,
-				10,
-				2
-			);
+		public function filter( callable $fun ) {
+			call_user_func( $fun, $this );
+			return $this;
 		}
 
 		/**
