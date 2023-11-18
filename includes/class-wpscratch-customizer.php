@@ -113,10 +113,10 @@ if ( ! class_exists( 'WPScratch_Customizer' ) ) {
 
 		/** Get customizer value
 		 *
-		 * @param string $customizer_name - Give customizer name.
+		 * @param string $settings - Give customizer settings name.
 		 */
-		public static function get( string $customizer_name ) {
-			return get_theme_mod( WPScratch_Helper::slug( $customizer_name ), null );
+		public static function get( string $settings ) {
+			return get_theme_mod( WPScratch_Helper::slug( $settings ), null );
 		}
 
 		/**

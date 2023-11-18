@@ -43,16 +43,6 @@ if ( ! class_exists( 'WPScratch_Enqueue' ) ) {
 		public string $type;
 
 		/**
-		 * Use ::.
-		 *
-		 * @return $this;
-		 */
-		public static function init() {
-
-			return new self();
-		}
-
-		/**
 		 * Add files to enqueueing list
 		 *
 		 * @param string $id - id for the enqueue.

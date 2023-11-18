@@ -116,15 +116,6 @@ if ( ! class_exists( 'WPScratch_Cpt' ) ) {
 		}
 
 		/**
-		 * Set custom post type name
-		 *
-		 * @param string $name - Name of the custom post type.
-		 */
-		public static function init( string $name ) {
-			return new self( $name );
-		}
-
-		/**
 		 * Set custom post type name when the instance create
 		 *
 		 * @param string $name - Name of the custom post type.
@@ -132,6 +123,66 @@ if ( ! class_exists( 'WPScratch_Cpt' ) ) {
 		public function set_name( string $name ) {
 			$this->name = $name;
 			$this->prepare_cpt_labels();
+		}
+
+		/**
+		 * Set taxonomy show_ui.
+		 *
+		 * @param bool $status - This custom post type requires UI?.
+		 *
+		 * @return $this
+		 */
+		public function set_show_ui( bool $status ) {
+			$this->show_ui = $status;
+			return $this;
+		}
+
+		/**
+		 * Set taxonomy show_in_menu.
+		 *
+		 * @param bool $status - show_in_menu.
+		 *
+		 * @return $this
+		 */
+		public function set_show_in_menu( bool $status ) {
+			$this->show_in_menu = $status;
+			return $this;
+		}
+
+		/**
+		 * Set taxonomy query_var.
+		 *
+		 * @param bool $status - query_var.
+		 *
+		 * @return $this
+		 */
+		public function set_query_var( bool $status ) {
+			$this->query_var = $status;
+			return $this;
+		}
+
+		/**
+		 * Set taxonomy rewrite.
+		 *
+		 * @param array $rewrite - rewrite.
+		 *
+		 * @return $this
+		 */
+		public function set_rewrite( array $rewrite ) {
+			$this->rewrite = $rewrite;
+			return $this;
+		}
+
+		/**
+		 * Set taxonomy labels.
+		 *
+		 * @param array $labels - labels.
+		 *
+		 * @return $this
+		 */
+		public function set_labels( array $labels ) {
+			$this->labels = $labels;
+			return $this;
 		}
 
 		/**
@@ -150,21 +201,6 @@ if ( ! class_exists( 'WPScratch_Cpt' ) ) {
 			}
 
 			return $this;
-		}
-
-		/**
-		 * Create post filter
-		 *
-		 * @param string   $name - name of the custom post.
-		 * @param callable $fun - Filter function.
-		 */
-		public static function filter( string $name, callable $fun ) {
-			add_filter(
-				'wpscratch_cpt_' . WPScratch_Helper::slug( $name ),
-				$fun,
-				10,
-				2
-			);
 		}
 
 		/**

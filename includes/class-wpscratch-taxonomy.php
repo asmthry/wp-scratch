@@ -200,21 +200,6 @@ if ( ! class_exists( 'WPScratch_Taxonomy' ) ) {
 		}
 
 		/**
-		 * Create taxonomy filter
-		 *
-		 * @param string   $name - Name of the taxonomy.
-		 * @param callable $fun - Filter function.
-		 */
-		public static function filter( string $name, callable $fun ) {
-			add_filter(
-				'wpscratch_taxonomy_' . WPScratch_Helper::slug( $name ),
-				$fun,
-				10,
-				2
-			);
-		}
-
-		/**
 		 * Prepare Taxonomy Labels Based On Name.
 		 */
 		private function prepare_labels() {
