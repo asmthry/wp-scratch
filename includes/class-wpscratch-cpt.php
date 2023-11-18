@@ -6,12 +6,12 @@
  * @package WP Scratch
  */
 
-// Check if Asmthry_Cpt exists.
+// Check if WPScratch_Cpt exists.
 if ( ! class_exists( 'WPScratch_Cpt' ) ) {
 	/**
 	 * Use this class to create custom post type
 	 *
-	 * @class Asmthry_Cpt
+	 * @class WPScratch_Cpt
 	 */
 	class WPScratch_Cpt {
 		/**
@@ -116,15 +116,6 @@ if ( ! class_exists( 'WPScratch_Cpt' ) ) {
 		}
 
 		/**
-		 * Set custom post type name
-		 *
-		 * @param string $name - Name of the custom post type.
-		 */
-		public static function init( string $name ) {
-			return new self( $name );
-		}
-
-		/**
 		 * Set custom post type name when the instance create
 		 *
 		 * @param string $name - Name of the custom post type.
@@ -135,33 +126,81 @@ if ( ! class_exists( 'WPScratch_Cpt' ) ) {
 		}
 
 		/**
-		 * Create post filter
+		 * Set taxonomy show_ui.
 		 *
-		 * @param string   $name - name of the custom post.
-		 * @param callable $fun - Filter function.
+		 * @param bool $status - This custom post type requires UI?.
+		 *
+		 * @return $this
 		 */
-		public static function filter( string $name, callable $fun ) {
-			add_filter(
-				'asmthry_cpt_' . WPScratch_Helper::slug( $name ),
-				$fun,
-				10,
-				2
-			);
+		public function set_show_ui( bool $status ) {
+			$this->show_ui = $status;
+			return $this;
 		}
 
 		/**
-		 * Register custom post type
+		 * Set taxonomy show_in_menu.
+		 *
+		 * @param bool $status - show_in_menu.
+		 *
+		 * @return $this
 		 */
-		public function create() {
-			add_action(
-				'init',
-				function () {
-					register_post_type(
-						WPScratch_Helper::slug( $this->name ),
-						$this->get_filtered_parameters()
-					);
-				}
-			);
+		public function set_show_in_menu( bool $status ) {
+			$this->show_in_menu = $status;
+			return $this;
+		}
+
+		/**
+		 * Set taxonomy query_var.
+		 *
+		 * @param bool $status - query_var.
+		 *
+		 * @return $this
+		 */
+		public function set_query_var( bool $status ) {
+			$this->query_var = $status;
+			return $this;
+		}
+
+		/**
+		 * Set taxonomy rewrite.
+		 *
+		 * @param array $rewrite - rewrite.
+		 *
+		 * @return $this
+		 */
+		public function set_rewrite( array $rewrite ) {
+			$this->rewrite = $rewrite;
+			return $this;
+		}
+
+		/**
+		 * Set taxonomy labels.
+		 *
+		 * @param array $labels - labels.
+		 *
+		 * @return $this
+		 */
+		public function set_labels( array $labels ) {
+			$this->labels = $labels;
+			return $this;
+		}
+
+		/**
+		 * Set taxonomy for the custom post type
+		 *
+		 * @param string        $name - Name of the taxonomy.
+		 * @param callable|null $fun - Do some actions on taxonomy instance.
+		 *
+		 * @return $this
+		 */
+		public function taxonomy( string $name, callable|null $fun = null ) {
+			if ( $fun ) {
+				$fun( new WPScratch_Taxonomy( $name, $this->name ) );
+			} else {
+				new WPScratch_Taxonomy( $name, $this->name );
+			}
+
+			return $this;
 		}
 
 		/**
@@ -170,7 +209,7 @@ if ( ! class_exists( 'WPScratch_Cpt' ) ) {
 		private function get_filtered_parameters() {
 
 			$filters = apply_filters(
-				'asmthry_cpt_' . WPScratch_Helper::slug( $this->name ),
+				'wpscratch_cpt_' . WPScratch_Helper::slug( $this->name ),
 				get_object_vars( $this )
 			);
 
@@ -201,6 +240,21 @@ if ( ! class_exists( 'WPScratch_Cpt' ) ) {
 				'archives'              => __( $this->name . ' archives', 'asmthry' ),
 			);
 			// @codingStandardsIgnoreEnd
+		}
+
+		/**
+		 * Register custom post type
+		 */
+		public function __destruct() {
+			add_action(
+				'init',
+				function () {
+					register_post_type(
+						WPScratch_Helper::slug( $this->name ),
+						$this->get_filtered_parameters()
+					);
+				}
+			);
 		}
 	}
 }

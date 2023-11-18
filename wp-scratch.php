@@ -20,6 +20,7 @@ defined( 'ABSPATH' ) || die( 'What are you doing here? No direct access allowed.
  */
 define( 'WP_SCRATCH_VERSION', '0.0.1' );
 define( 'WP_SCRATCH_DIR', plugin_dir_path( __FILE__ ) . '/' );
+define( 'ASMTHRY_THEME_URL', get_template_directory_uri() . '/' );
 
 /** Including Files For WP Scratch Plugin Support */
 
@@ -27,14 +28,23 @@ define( 'WP_SCRATCH_DIR', plugin_dir_path( __FILE__ ) . '/' );
 require_once WP_SCRATCH_DIR . 'class-wpscratch-activate.php';
 register_activation_hook( __FILE__, array( 'WPScratch_Activate', 'activate' ) );
 
-/** Include custom post type helper class */
+/** Include helper class */
 require_once WP_SCRATCH_DIR . 'class-wpscratch-helper.php';
 
 /** Include custom post type helper class */
 require_once WP_SCRATCH_DIR . 'includes/class-wpscratch-cpt.php';
 
+/** Include taxonomy helper class */
+require_once WP_SCRATCH_DIR . 'includes/class-wpscratch-taxonomy.php';
+
 /** Include theme support class */
 require_once WP_SCRATCH_DIR . 'includes/class-wpscratch-theme-support.php';
+
+/** Include enqueue support class */
+require_once WP_SCRATCH_DIR . 'includes/class-wpscratch-enqueue.php';
+
+/** Include customizer support class */
+require_once WP_SCRATCH_DIR . 'includes/class-wpscratch-customizer.php';
 
 /**Plugin Deactivate */
 require_once WP_SCRATCH_DIR . 'class-wpscratch-deactivate.php';
